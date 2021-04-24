@@ -1,0 +1,20 @@
+query GetCharactersList {
+    characters {
+        results {
+            id
+            name
+            status
+            image
+            created
+            species
+            type
+            gender
+            origin {
+                name
+            }
+            location {
+                name
+            }
+        }
+    }
+}
