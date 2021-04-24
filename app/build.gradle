@@ -1,18 +1,22 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id('com.apollographql.apollo').version('2.5.4')
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    buildToolsVersion '30.0.3'
 
     defaultConfig {
-        applicationId "ch.anoop.rickmorty"
+        applicationId 'ch.anoop.rickmorty'
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
 
     buildTypes {
@@ -28,35 +32,54 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+}
+
+apollo {
+    // instruct the compiler to generate Kotlin models
+    generateKotlinModels.set(true)
 }
 
 dependencies {
 
-    // Kotlin
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.32'
-    implementation 'androidx.core:core-ktx:1.3.2'
+    // JUnit & Espresso - Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 
-    // Kotlin Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-
-    // Appcompat and Material Design
+    // AndroidX, Legacy libs
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    // Lifecycle Runtime
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+
+    // Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    // Kotlin Core & Standard Library
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.32'
+
+    // Material Design
     implementation 'com.google.android.material:material:1.3.0'
 
-    // LiveData
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
 
-    // ViewModel
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    // Apollo GraphQL Library
+    implementation 'com.apollographql.apollo:apollo-runtime:2.5.4'
+    // Apollo - For Kotlin coroutines support
+    implementation 'com.apollographql.apollo:apollo-coroutines-support:2.5.4'
 
+    // Coroutine Image Loader
+    implementation 'io.coil-kt:coil:1.1.1'
 
-    // Retrofit - Network calls
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    // Hilt
+    kapt 'com.google.dagger:hilt-compiler:2.35'
+    implementation 'com.google.dagger:hilt-android:2.35'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
 
-
-    // okHttp - Network calls
-    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
 }
