@@ -1,4 +1,7 @@
 package ch.anoop.rickmorty.view.fragment
 
-class CharacterDetailFragment {
+import androidx.fragment.app.Fragment
+
+class CharacterDetailFragment :Fragment(){
+
 }
