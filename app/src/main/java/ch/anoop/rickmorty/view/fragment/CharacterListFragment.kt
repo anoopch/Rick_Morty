@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ch.anoop.rickmorty.R
 import ch.anoop.rickmorty.databinding.FragmentCharacterListBinding
 import ch.anoop.rickmorty.view.ViewState
+import ch.anoop.rickmorty.view.fragment.CharacterListFragmentDirections.Companion.navigateToCharacterDetailsFragment
 import ch.anoop.rickmorty.view.recyclerview.CharacterAdapter
 import ch.anoop.rickmorty.view_model.CharacterListFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +44,9 @@ class CharacterListFragment : Fragment() {
             character.let {
                 if (!character.id.isNullOrBlank()) {
                     Log.e("CHAR_LIST_FRAG", "Clicked - : " + character.name)
+                    findNavController().navigate(
+                        navigateToCharacterDetailsFragment(character.id)
+                    )
                 }
             }
         }

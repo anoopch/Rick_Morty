@@ -1,59 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="character"
-            type="ch.anoop.rickmorty.GetCharacterByIDQuery.Character" />
+            name="response_data"
+            type="ch.anoop.rickmorty.GetCharacterByIDQuery.Data" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        app:cardCornerRadius="10dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ProgressBar
+            android:id="@+id/progress_bar_loading"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            tools:visibility="invisible" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_height="match_parent"
+            tools:visibility="visible">
 
-            <TextView
-                android:id="@+id/character_id"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/detailsContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@{character.id}"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="ID: #1" />
+                android:orientation="vertical"
+                android:padding="8dp">
 
-            <TextView
-                android:id="@+id/character_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@{character.name}"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:text="Name: Rick Sanchez" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{`ID : `+response_data.character.id}"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="ID: #1" />
 
-            <TextView
-                android:id="@+id/character_species"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@{character.species}"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Species: Human" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="22sp"
+                    android:text="@{`Name : `+response_data.character.name}"
+                    android:textStyle="bold"
+                    tools:text="Name: Rick Sanchez" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:text="@{`Species : `+response_data.character.species}"
+                    android:textStyle="bold"
+                    tools:text="Species: Human" />
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:text="@{`Origin : `+response_data.character.origin.name}"
+                    android:textStyle="bold"
+                    tools:text="Origin: Some Location, Some Where" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="@{`Last Seen : `+response_data.character.location.name}"
+                    tools:text="Last Seen : Some other location, Some Where else" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:text="@{`Status : `+response_data.character.status}"
+                    android:textStyle="bold"
+                    tools:text="Status : Alive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{`Gender : `+response_data.character.gender}"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Gender : Male" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{`Created : `+response_data.character.created}"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Created : 22101920T11.20.30.233" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
 
 </layout>
