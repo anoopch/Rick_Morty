@@ -1,0 +1,11 @@
+query GetEpisodesList {
+    episodes {
+        results {
+            id
+            name
+            air_date
+            episode
+            created
+        }
+    }
+}

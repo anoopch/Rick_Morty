@@ -1,0 +1,19 @@
+query GetLocationByID($episodeId: ID!) {
+    location(id: $episodeId) {
+        id
+        name
+        dimension
+        created
+        type
+        residents{
+            id
+            name
+            status
+            image
+            created
+            species
+            type
+            gender
+        }
+    }
+}

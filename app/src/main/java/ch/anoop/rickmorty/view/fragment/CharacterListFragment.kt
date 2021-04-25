@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ch.anoop.rickmorty.R
-import ch.anoop.rickmorty.databinding.FragmentCharacterListBinding
+import ch.anoop.rickmorty.databinding.FragmentListBinding
 import ch.anoop.rickmorty.view.ViewState
 import ch.anoop.rickmorty.view.fragment.CharacterListFragmentDirections.Companion.navigateToCharacterDetailsFragment
 import ch.anoop.rickmorty.view.recyclerview.CharacterAdapter
@@ -21,7 +21,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class CharacterListFragment : Fragment() {
 
-    private lateinit var binding: FragmentCharacterListBinding
+    private lateinit var binding: FragmentListBinding
     private val characterAdapter by lazy { CharacterAdapter() }
     private val viewModel by viewModels<CharacterListFragmentViewModel>()
 
@@ -29,14 +29,14 @@ class CharacterListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCharacterListBinding.inflate(inflater)
+        binding = FragmentListBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerviewCharacterList.adapter = characterAdapter
+        binding.recyclerviewList.adapter = characterAdapter
         viewModel.queryCharactersList()
         observeLiveData()
 
@@ -57,8 +57,8 @@ class CharacterListFragment : Fragment() {
             when (response) {
 
                 is ViewState.Loading<*> -> {
-                    binding.recyclerviewCharacterList.visibility = View.GONE
-                    binding.charactersEmptyText.visibility = View.GONE
+                    binding.recyclerviewList.visibility = View.GONE
+                    binding.emptyText.visibility = View.GONE
                     binding.progressBarLoading.visibility = View.VISIBLE
                 }
 
@@ -66,9 +66,9 @@ class CharacterListFragment : Fragment() {
                     if (response.value?.data?.characters?.results?.size == 0) {
                         setErrorView(R.string.no_characters_found)
                     } else {
-                        binding.recyclerviewCharacterList.visibility = View.VISIBLE
+                        binding.recyclerviewList.visibility = View.VISIBLE
                         characterAdapter.submitList(response.value?.data?.characters?.results)
-                        binding.charactersEmptyText.visibility = View.GONE
+                        binding.emptyText.visibility = View.GONE
                         binding.progressBarLoading.visibility = View.GONE
                     }
                 }
@@ -86,9 +86,9 @@ class CharacterListFragment : Fragment() {
 
     private fun setErrorView(stringResourceId: Int) {
         characterAdapter.submitList(emptyList())
-        binding.recyclerviewCharacterList.visibility = View.GONE
-        binding.charactersEmptyText.text = getString(stringResourceId)
-        binding.charactersEmptyText.visibility = View.VISIBLE
+        binding.recyclerviewList.visibility = View.GONE
+        binding.emptyText.text = getString(stringResourceId)
+        binding.emptyText.visibility = View.VISIBLE
         binding.progressBarLoading.visibility = View.GONE
     }
 

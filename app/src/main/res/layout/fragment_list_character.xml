@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E9E9E9E9"
-    tools:context=".view.fragment.CharacterListFragment">
+    android:background="#E9E9E9E9">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_character_list"
+        android:id="@+id/recyclerview_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -26,7 +25,7 @@
         tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/characters_empty_text"
+        android:id="@+id/empty_text"
         style="@style/Base.TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

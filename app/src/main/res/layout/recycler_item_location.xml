@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="character"
+            type="ch.anoop.rickmorty.GetCharactersListQuery.Result" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/character_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{character.id}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="ID: #1" />
+
+            <TextView
+                android:id="@+id/character_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{character.name}"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:text="Name: Rick Sanchez" />
+
+            <TextView
+                android:id="@+id/character_species"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{character.species}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Species: Human" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
