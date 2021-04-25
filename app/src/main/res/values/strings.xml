@@ -2,4 +2,8 @@
     <string name="app_name">Rick &amp; Morty</string>
     <string name="no_characters_found">No characters found</string>
     <string name="error_message_fail_to_load">\"ERROR.\n Sorry! Unable to load data now.\"</string>
+    <string name="application_logo">Application logo</string>
+    <string name="characters">Characters</string>
+    <string name="episodes">Episodes</string>
+    <string name="location">Location</string>
 </resources>

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ch.anoop.rickmorty.R
-import ch.anoop.rickmorty.databinding.FragmentListBinding
+import ch.anoop.rickmorty.databinding.FragmentListCharacterBinding
 import ch.anoop.rickmorty.view.ViewState
 import ch.anoop.rickmorty.view.fragment.CharacterListFragmentDirections.Companion.navigateToCharacterDetailsFragment
 import ch.anoop.rickmorty.view.recyclerview.CharacterAdapter
@@ -21,7 +21,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class CharacterListFragment : Fragment() {
 
-    private lateinit var binding: FragmentListBinding
+    private lateinit var binding: FragmentListCharacterBinding
     private val characterAdapter by lazy { CharacterAdapter() }
     private val viewModel by viewModels<CharacterListFragmentViewModel>()
 
@@ -29,7 +29,7 @@ class CharacterListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentListBinding.inflate(inflater)
+        binding = FragmentListCharacterBinding.inflate(inflater)
         return binding.root
     }
 
