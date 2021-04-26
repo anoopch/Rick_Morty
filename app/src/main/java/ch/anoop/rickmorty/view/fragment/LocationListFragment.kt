@@ -9,41 +9,41 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ch.anoop.rickmorty.R
-import ch.anoop.rickmorty.databinding.FragmentListCharacterBinding
+import ch.anoop.rickmorty.databinding.FragmentListLocationBinding
 import ch.anoop.rickmorty.view.ViewState
-import ch.anoop.rickmorty.view.recyclerview.CharacterAdapter
-import ch.anoop.rickmorty.view_model.CharacterListFragmentViewModel
+import ch.anoop.rickmorty.view.recyclerview.LocationAdapter
+import ch.anoop.rickmorty.view_model.LocationListFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class LocationListFragment : Fragment() {
-    private lateinit var binding: FragmentListCharacterBinding
-    private val characterAdapter by lazy { CharacterAdapter() }
-    private val viewModel by viewModels<CharacterListFragmentViewModel>()
+    private lateinit var binding: FragmentListLocationBinding
+    private val locationAdapter by lazy { LocationAdapter() }
+    private val viewModel by viewModels<LocationListFragmentViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentListCharacterBinding.inflate(inflater)
+        binding = FragmentListLocationBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerviewList.adapter = characterAdapter
-        viewModel.queryCharactersList()
+        binding.recyclerviewList.adapter = locationAdapter
+        viewModel.queryLocationList()
         observeLiveData()
 
-        characterAdapter.onItemClicked = { character ->
-            character.let {
-                if (!character.id.isNullOrBlank()) {
-                    Log.e("CHAR_LIST_FRAG", "Clicked - : " + character.name)
+        locationAdapter.onItemClicked = { location ->
+            location.let {
+                if (!location.id.isNullOrBlank()) {
+                    Log.e("CHAR_LIST_FRAG", "Clicked - : " + location.name)
                     findNavController().navigate(
-                        CharacterListFragmentDirections.navigateToCharacterDetailsFragment(character.id)
+                        LocationListFragmentDirections.navigateToLocationDetailFragment(location.id)
                     )
                 }
             }
@@ -51,7 +51,7 @@ class LocationListFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        viewModel.charactersList.observe(viewLifecycleOwner) { response ->
+        viewModel.locationList.observe(viewLifecycleOwner) { response ->
             when (response) {
 
                 is ViewState.Loading<*> -> {
@@ -61,18 +61,18 @@ class LocationListFragment : Fragment() {
                 }
 
                 is ViewState.Success<*> -> {
-                    if (response.value?.data?.characters?.results?.size == 0) {
-                        setErrorView(R.string.no_characters_found)
+                    if (response.value?.data?.locations?.results?.size == 0) {
+                        setErrorView(R.string.no_locations_found)
                     } else {
                         binding.recyclerviewList.visibility = View.VISIBLE
-                        characterAdapter.submitList(response.value?.data?.characters?.results)
+                        locationAdapter.submitList(response.value?.data?.locations?.results)
                         binding.emptyText.visibility = View.GONE
                         binding.progressBarLoading.visibility = View.GONE
                     }
                 }
 
                 is ViewState.Empty<*> -> {
-                    setErrorView(R.string.no_characters_found)
+                    setErrorView(R.string.no_locations_found)
                 }
 
                 is ViewState.Error<*> -> {
@@ -83,7 +83,7 @@ class LocationListFragment : Fragment() {
     }
 
     private fun setErrorView(stringResourceId: Int) {
-        characterAdapter.submitList(emptyList())
+        locationAdapter.submitList(emptyList())
         binding.recyclerviewList.visibility = View.GONE
         binding.emptyText.text = getString(stringResourceId)
         binding.emptyText.visibility = View.VISIBLE

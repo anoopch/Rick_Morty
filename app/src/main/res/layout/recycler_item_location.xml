@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="character"
-            type="ch.anoop.rickmorty.GetCharactersListQuery.Result" />
+            name="location"
+            type="ch.anoop.rickmorty.GetLocationsListQuery.Result" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -23,34 +23,40 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/character_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{character.id}"
+                android:text="@{location.id}"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="ID: #1" />
 
             <TextView
-                android:id="@+id/character_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{character.name}"
+                android:text="@{location.name}"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 tools:text="Name: Rick Sanchez" />
 
             <TextView
-                android:id="@+id/character_species"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{character.species}"
+                android:text="@{location.created}"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="Species: Human" />
+                tools:text="Created: DATE_TIME" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{location.dimension}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Dimension: DIMENSION VALUE" />
 
         </LinearLayout>
 
