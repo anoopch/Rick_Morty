@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="character"
-            type="ch.anoop.rickmorty.GetCharactersListQuery.Result" />
+            name="episode"
+            type="ch.anoop.rickmorty.GetEpisodesListQuery.Result" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{character.id}"
+                android:text="@{episode.id}"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="ID: #1" />
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{character.name}"
+                android:text="@{episode.name}"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 tools:text="Name: Rick Sanchez" />
@@ -47,10 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{character.species}"
+                android:text="@{episode.created}"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="Species: Human" />
+                tools:text="Created: DATE" />
 
         </LinearLayout>
 

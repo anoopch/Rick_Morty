@@ -107,7 +107,7 @@
                         android:layout_margin="8dp"
                         android:drawablePadding="16dp"
                         android:gravity="center_vertical"
-                        android:text="@string/location"
+                        android:text="@string/locations"
                         android:textSize="28sp"
                         android:textStyle="bold"
                         app:drawableEndCompat="@drawable/ic_navigate"

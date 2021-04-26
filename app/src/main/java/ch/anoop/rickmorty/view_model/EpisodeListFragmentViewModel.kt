@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.anoop.rickmorty.GetCharacterByIDQuery
+import ch.anoop.rickmorty.GetEpisodesListQuery
 import ch.anoop.rickmorty.repository.network.NetworkRepository
 import ch.anoop.rickmorty.view.ViewState
 import com.apollographql.apollo.api.Response
@@ -20,18 +20,17 @@ class EpisodeListFragmentViewModel @Inject constructor(
     private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
-    private val _character by lazy { MutableLiveData<ViewState<Response<GetCharacterByIDQuery.Data>>>() }
-    val character: LiveData<ViewState<Response<GetCharacterByIDQuery.Data>>>
-        get() = _character
+    private val _episodesList by lazy { MutableLiveData<ViewState<Response<GetEpisodesListQuery.Data>>>() }
+    val episodesList: LiveData<ViewState<Response<GetEpisodesListQuery.Data>>>
+        get() = _episodesList
 
-    fun queryCharacterById(id: String) = viewModelScope.launch {
+    fun queryEpisodesList() = viewModelScope.launch {
+        _episodesList.postValue(ViewState.Loading())
         try {
-            _character.postValue(ViewState.Loading())
-            _character.postValue(ViewState.Success(networkRepository.getCharacterByID(id)))
-            Log.d("VIEW_MODEL", "success")
+            _episodesList.postValue(ViewState.Success(networkRepository.getEpisodesList()))
         } catch (e: Exception) {
             Log.d("VIEW_MODEL", "Failure", e)
-            _character.postValue(ViewState.Error("Error fetching character detail for id - $id"))
+            _episodesList.postValue(ViewState.Error("Error fetching episodes"))
         }
     }
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.anoop.rickmorty.GetCharacterByIDQuery
+import ch.anoop.rickmorty.GetLocationsListQuery
 import ch.anoop.rickmorty.repository.network.NetworkRepository
 import ch.anoop.rickmorty.view.ViewState
 import com.apollographql.apollo.api.Response
@@ -20,18 +20,18 @@ class LocationListFragmentViewModel @Inject constructor(
     private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
-    private val _character by lazy { MutableLiveData<ViewState<Response<GetCharacterByIDQuery.Data>>>() }
-    val character: LiveData<ViewState<Response<GetCharacterByIDQuery.Data>>>
-        get() = _character
+    private val _locationList by lazy { MutableLiveData<ViewState<Response<GetLocationsListQuery.Data>>>() }
+    val locationList: LiveData<ViewState<Response<GetLocationsListQuery.Data>>>
+        get() = _locationList
 
-    fun queryCharacterById(id: String) = viewModelScope.launch {
+    fun queryLocationList() = viewModelScope.launch {
         try {
-            _character.postValue(ViewState.Loading())
-            _character.postValue(ViewState.Success(networkRepository.getCharacterByID(id)))
+            _locationList.postValue(ViewState.Loading())
+            _locationList.postValue(ViewState.Success(networkRepository.getLocationsList()))
             Log.d("VIEW_MODEL", "success")
         } catch (e: Exception) {
             Log.d("VIEW_MODEL", "Failure", e)
-            _character.postValue(ViewState.Error("Error fetching character detail for id - $id"))
+            _locationList.postValue(ViewState.Error("Error fetching Location list"))
         }
     }
 }
