@@ -13,23 +13,22 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navigationController: NavController
+    private lateinit var viewBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewBinding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        setupNavigationViews(viewBinding)
+        setupNavigationViews()
     }
 
-    private fun setupNavigationViews(viewBinding: ActivityMainBinding) {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(viewBinding.navHostFragment.id) as NavHostFragment
+    private fun setupNavigationViews() {
+        val navHostFragment = supportFragmentManager.findFragmentById(viewBinding.navHostFragment.id) as NavHostFragment
         navigationController = navHostFragment.findNavController()
         setupActionBarWithNavController(navigationController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        navigationController.navigateUp()
-        return super.onSupportNavigateUp()
+        return navigationController.navigateUp() || super.onSupportNavigateUp()
     }
 }

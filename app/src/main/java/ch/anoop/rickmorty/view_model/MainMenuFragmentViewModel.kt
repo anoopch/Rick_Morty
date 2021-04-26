@@ -27,4 +27,8 @@ class MainMenuFragmentViewModel @Inject constructor() : ViewModel() {
     fun onClickLocationsButton() {
         _buttonClickHandler.postValue(NavigationAction.LocationOption())
     }
+
+    fun resetSelectionOption() {
+        _buttonClickHandler.postValue(null)
+    }
 }

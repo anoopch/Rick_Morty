@@ -42,23 +42,23 @@ class MainMenuFragment : Fragment() {
                     findNavController().navigate(
                         MainMenuFragmentDirections.navigateToCharacterListFragment()
                     )
+                    viewModel.resetSelectionOption()
                 }
 
                 is NavigationAction.EpisodeOption -> {
                     findNavController().navigate(
                         MainMenuFragmentDirections.navigateToEpisodeListFragment()
                     )
+                    viewModel.resetSelectionOption()
                 }
 
                 is NavigationAction.LocationOption -> {
                     findNavController().navigate(
                         MainMenuFragmentDirections.navigateToLocationListFragment()
                     )
+                    viewModel.resetSelectionOption()
                 }
-
-
             }
-
         }
     }
 }
