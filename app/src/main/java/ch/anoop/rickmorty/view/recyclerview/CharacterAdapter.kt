@@ -34,5 +34,4 @@ class CharacterAdapter : ListAdapter<GetCharactersListQuery.Result,
         }
 
     }
-
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -32,21 +33,17 @@
                 android:orientation="vertical"
                 android:padding="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="@{`ID : `+response_data.character.id}"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:text="ID: #1" />
+                    app:itemImageSrc="@{response_data.character.image}" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:textSize="22sp"
                     android:text="@{`Name : `+response_data.character.name}"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     tools:text="Name: Rick Sanchez" />
 
@@ -54,8 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:textSize="18sp"
                     android:text="@{`Species : `+response_data.character.species}"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:text="Species: Human" />
 
@@ -63,8 +60,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:textSize="18sp"
                     android:text="@{`Origin : `+response_data.character.origin.name}"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:text="Origin: Some Location, Some Where" />
 
@@ -72,17 +69,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:text="@{`Last Seen : `+response_data.character.location.name}"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:text="@{`Last Seen : `+response_data.character.location.name}"
                     tools:text="Last Seen : Some other location, Some Where else" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:textSize="18sp"
                     android:text="@{`Status : `+response_data.character.status}"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:text="Status : Alive" />
 
