@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.anoop.rickmorty.GetEpisodesListQuery
-import ch.anoop.rickmorty.repository.network.NetworkRepository
+import ch.anoop.rickmorty.repository.network.NetworkDataSource
 import ch.anoop.rickmorty.view.ViewState
 import com.apollographql.apollo.api.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class EpisodeListFragmentViewModel @Inject constructor(
-    private val networkRepository: NetworkRepository,
+    private val networkDataSource: NetworkDataSource,
 ) : ViewModel() {
 
     private val _episodesList by lazy { MutableLiveData<ViewState<Response<GetEpisodesListQuery.Data>>>() }
@@ -27,7 +27,7 @@ class EpisodeListFragmentViewModel @Inject constructor(
     fun queryEpisodesList() = viewModelScope.launch {
         _episodesList.postValue(ViewState.Loading())
         try {
-            _episodesList.postValue(ViewState.Success(networkRepository.getEpisodesList()))
+            _episodesList.postValue(ViewState.Success(networkDataSource.getEpisodesList()))
         } catch (e: Exception) {
             Log.d("VIEW_MODEL", "Failure", e)
             _episodesList.postValue(ViewState.Error("Error fetching episodes"))

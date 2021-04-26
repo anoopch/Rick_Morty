@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.anoop.rickmorty.GetCharacterByIDQuery
-import ch.anoop.rickmorty.repository.network.NetworkRepository
+import ch.anoop.rickmorty.repository.network.NetworkDataSource
 import ch.anoop.rickmorty.view.ViewState
 import com.apollographql.apollo.api.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class CharacterDetailFragmentViewModel @Inject constructor(
-    private val networkRepository: NetworkRepository,
+    private val networkDataSource: NetworkDataSource,
 ) : ViewModel() {
 
     private val _character by lazy { MutableLiveData<ViewState<Response<GetCharacterByIDQuery.Data>>>() }
@@ -27,7 +27,7 @@ class CharacterDetailFragmentViewModel @Inject constructor(
     fun queryCharacterById(id: String) = viewModelScope.launch {
         try {
             _character.postValue(ViewState.Loading())
-            _character.postValue(ViewState.Success(networkRepository.getCharacterByID(id)))
+            _character.postValue(ViewState.Success(networkDataSource.getCharacterByID(id)))
             Log.d("VIEW_MODEL", "success")
         } catch (e: Exception) {
             Log.d("VIEW_MODEL", "Failure", e)

@@ -5,11 +5,11 @@ import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
 import javax.inject.Inject
 
-class NetworkRepositoryImpl @Inject constructor(
+class NetworkDataSourceImpl @Inject constructor(
     private val networkService: RickMortyAPI
-) : NetworkRepository {
-    override suspend fun getCharactersList(): Response<GetCharactersListQuery.Data> {
-        return networkService.getAPIClient().query(GetCharactersListQuery()).await()
+) : NetworkDataSource {
+    override suspend fun getCharactersList(pageNumber:Int): Response<GetCharactersListQuery.Data> {
+        return networkService.getAPIClient().query(GetCharactersListQuery(pageNumber)).await()
     }
 
     override suspend fun getCharacterByID(id: String): Response<GetCharacterByIDQuery.Data> {

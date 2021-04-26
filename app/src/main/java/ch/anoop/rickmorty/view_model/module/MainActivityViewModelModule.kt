@@ -1,7 +1,7 @@
 package ch.anoop.rickmorty.view_model.module
 
-import ch.anoop.rickmorty.repository.network.NetworkRepository
-import ch.anoop.rickmorty.repository.network.NetworkRepositoryImpl
+import ch.anoop.rickmorty.repository.network.NetworkDataSource
+import ch.anoop.rickmorty.repository.network.NetworkDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +14,6 @@ abstract class MainActivityViewModelModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindNetworkRepository(repo: NetworkRepositoryImpl): NetworkRepository
+    abstract fun bindNetworkRepository(repo: NetworkDataSourceImpl): NetworkDataSource
 
 }

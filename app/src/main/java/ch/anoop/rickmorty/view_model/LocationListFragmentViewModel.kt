@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.anoop.rickmorty.GetLocationsListQuery
-import ch.anoop.rickmorty.repository.network.NetworkRepository
+import ch.anoop.rickmorty.repository.network.NetworkDataSource
 import ch.anoop.rickmorty.view.ViewState
 import com.apollographql.apollo.api.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class LocationListFragmentViewModel @Inject constructor(
-    private val networkRepository: NetworkRepository,
+    private val networkDataSource: NetworkDataSource,
 ) : ViewModel() {
 
     private val _locationList by lazy { MutableLiveData<ViewState<Response<GetLocationsListQuery.Data>>>() }
@@ -27,7 +27,7 @@ class LocationListFragmentViewModel @Inject constructor(
     fun queryLocationList() = viewModelScope.launch {
         try {
             _locationList.postValue(ViewState.Loading())
-            _locationList.postValue(ViewState.Success(networkRepository.getLocationsList()))
+            _locationList.postValue(ViewState.Success(networkDataSource.getLocationsList()))
             Log.d("VIEW_MODEL", "success")
         } catch (e: Exception) {
             Log.d("VIEW_MODEL", "Failure", e)

@@ -1,5 +1,5 @@
-query GetCharactersList {
-    characters {
+query GetCharactersList ($pageNumber:Int!){
+    characters(page:$pageNumber) {
         results {
             id
             name
